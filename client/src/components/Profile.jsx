@@ -35,7 +35,7 @@ const Profile = () => {
             </Avatar>
           </section>
           <section>
-            <div className='flex flex-col text-white gap-5'>
+            <div className='flex flex-col text-black gap-5'>
               <div className='flex items-center gap-2'>
                 <span>{userProfile?.username}</span>
                 {
