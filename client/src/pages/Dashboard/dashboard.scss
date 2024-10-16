@@ -1,0 +1,12 @@
+@import "../../styles/utils.scss";
+
+.dashboard-container{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+
+
+    .table-tabs{
+        margin-top: 2rem;
+    }
+}
