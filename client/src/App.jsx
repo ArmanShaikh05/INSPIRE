@@ -1,9 +1,5 @@
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Navigate,
-} from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import "./styles/app.scss";
 import AppLayout from "./layout/AppLayout";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import Approvals from "./pages/Approvals/Approvals";
@@ -18,6 +14,7 @@ import Profile from './components/Profile';
 import Login from './components/Login';
 import Signup from './components/Signup';
 import ProtectedRoutes from './components/ProtectedRoutes';
+
 import { io } from "socket.io-client";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
@@ -58,32 +55,32 @@ const App = () => {
       dispatch(setSocket(null));
     }
   }, [user, dispatch]);
+
   return (
     <Router>
-    <Routes>
-
-    {/* <Route path="/login" element={<Login />} />
-    <Route path="/signup" element={<SignUp />} /> */}
-
-      <Route element={<AppLayout />}>
-        <Route index element={<Navigate replace to="dashboard" />} />
-        <Route path="/dashboard" element={<Dashboard />}>
-          <Route path="" element={<UniversityTables />} />
-          <Route path="institue" element={<InstituteTables />} />
-          <Route path="alumini" element={<AluminiTables />} />
+      <Routes>
+        <Route element={<AppLayout />}>
+          {/* Default route is now Home */}
+          <Route index element={<Navigate replace to="home" />} />
+          <Route path="dashboard" element={<Dashboard />}>
+            <Route path="" element={<UniversityTables />} />
+            <Route path="institue" element={<InstituteTables />} />
+            <Route path="alumini" element={<AluminiTables />} />
+          </Route>
+          <Route path="/approvals" element={<Approvals />} />
+          <Route path="/rankings" element={<Rankings />} />
+          <Route path="home" element={<Home />} />
+          <Route path="chat" element={<ProtectedRoutes><ChatPage /></ProtectedRoutes>} />
+          <Route path="profile/:id" element={<ProtectedRoutes><Profile /></ProtectedRoutes>} />
+          <Route path="account/edit" element={<ProtectedRoutes><EditProfile /></ProtectedRoutes>} />
         </Route>
-        <Route path="/approvals" element={<Approvals />} />
-        <Route path="/rankings" element={<Rankings />} />
-        <Route path="home" element={<Home />} />
-        <Route path="chat" element={<ProtectedRoutes><ChatPage /></ProtectedRoutes>} />
-        <Route path="profile/:id" element={<ProtectedRoutes><Profile /></ProtectedRoutes>} />
-        <Route path="account/edit" element={<ProtectedRoutes><EditProfile /></ProtectedRoutes>} />s
-      </Route>
-      <Route path="login" element={<Login />} />
-      <Route path="signup" element={<Signup />} />
-    </Routes>
-  </Router>
-  )
-}
 
-export default App
+        {/* Auth Routes */}
+        <Route path="login" element={<Login />} />
+        <Route path="signup" element={<Signup />} />
+      </Routes>
+    </Router>
+  );
+};
+
+export default App;
