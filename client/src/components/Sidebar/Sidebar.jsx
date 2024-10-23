@@ -8,6 +8,8 @@ import {
   HiOutlineUsers
 
 } from "react-icons/hi2";
+import { FaFileCircleCheck } from "react-icons/fa6";
+import { PiRanking } from "react-icons/pi";
 import { HiOutlineSearch, HiOutlineBell, HiOutlinePlus } from "react-icons/hi";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -108,6 +110,24 @@ const Sidebar = () => {
           <div className={`StyledNavLink ${path === "users" ? "active" : ""}`} onClick={() => navigate("/users")}>
             <HiOutlineUsers />
             <span>Users</span>
+          </div>
+        </li>
+        <li>
+          <div
+            className={`StyledNavLink ${path === "approvals" ? "active" : ""}`}
+            onClick={() => navigate("/approvals")}
+          >
+            <FaFileCircleCheck />
+            <span>Approvals</span>
+          </div>
+        </li>
+        <li>
+          <div
+            className={`StyledNavLink ${path === "rankings" ? "active" : ""}`}
+            onClick={() => navigate("/rankings")}
+          >
+            <PiRanking />
+            <span>Rankings</span>
           </div>
         </li>
         <li onClick={() => navigate("/settings")}>
