@@ -129,10 +129,9 @@ const Sidebar = () => {
             <span>Rankings</span>
           </div>
         </li>
-        <li onClick={() => navigate("/settings")}>
-          <div className={`StyledNavLink ${path === "settings" ? "active" : ""}`}>
-            <HiOutlineCog6Tooth />
-            <span>Settings</span>
+        <li>
+          <Link className="StyledNavLink" to={"/home"}>
+            <span>Home</span>
           </Link>
         </li>
         <li>
