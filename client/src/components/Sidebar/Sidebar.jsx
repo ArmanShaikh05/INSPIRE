@@ -1,11 +1,13 @@
-import { Avatar } from "@/assets"
-import { FaFileCircleCheck } from "react-icons/fa6";
+import "./sidebar.scss";
+import { Avatar } from "../../assets";
 import {
+  HiOutlineCalendarDays,
   HiOutlineCalendarDays,
   HiOutlineCog6Tooth,
   HiOutlineHome,
   HiOutlinePlus
 } from "react-icons/hi2";
+import { FaFileCircleCheck } from "react-icons/fa6";
 import { PiRanking } from "react-icons/pi";
 import { Link, useNavigate } from "react-router-dom";
 import "./sidebar.scss"
@@ -67,13 +69,46 @@ const Sidebar = () => {
       </div>
 
       <ul className="NavList">
-        <li>
-          <div
-            className={`StyledNavLink ${path === "dashboard" ? "active" : ""}`}
-            onClick={() => navigate("/dashboard")}
-          >
+        <li onClick={() => sidebarHandler("Home")}>
+          <div className={`StyledNavLink ${path === "" ? "active" : ""}`}>
             <HiOutlineHome />
             <span>Home</span>
+          </div>
+        </li>
+        <li onClick={() => sidebarHandler("Search")}>
+          <div className={`StyledNavLink ${path === "search" ? "active" : ""}`}>
+            <HiOutlineSearch />
+            <span>Search</span>
+          </div>
+        </li>
+        <li onClick={() => sidebarHandler("Messages")}>
+          <div className={`StyledNavLink ${path === "chat" ? "active" : ""}`}>
+            <HiOutlineCalendarDays />
+            <span>Chat</span>
+          </div>
+        </li>
+        <li onClick={() => sidebarHandler("Profile")}>
+          <div className={`StyledNavLink ${path.startsWith("profile") ? "active" : ""}`}>
+            <HiOutlineCalendarDays />
+            <span>Profile</span>
+          </div>
+        </li>
+        <li>
+          <div className={`StyledNavLink ${path === "bookings" ? "active" : ""}`} onClick={() => navigate("/bookings")}>
+            <HiOutlineCalendarDays />
+            <span>Bookings</span>
+          </div>
+        </li>
+        <li>
+          <div className={`StyledNavLink ${path === "cabins" ? "active" : ""}`} onClick={() => navigate("/cabins")}>
+            <HiOutlineHomeModern />
+            <span>Cabins</span>
+          </div>
+        </li>
+        <li>
+          <div className={`StyledNavLink ${path === "users" ? "active" : ""}`} onClick={() => navigate("/users")}>
+            <HiOutlineUsers />
+            <span>Users</span>
           </div>
         </li>
         <li>
@@ -94,9 +129,8 @@ const Sidebar = () => {
             <span>Rankings</span>
           </div>
         </li>
-
-        <li>
-          <Link className="StyledNavLink" to={"/settings"}>
+        <li onClick={() => navigate("/settings")}>
+          <div className={`StyledNavLink ${path === "settings" ? "active" : ""}`}>
             <HiOutlineCog6Tooth />
             <span>Settings</span>
           </Link>
@@ -158,7 +192,7 @@ const Sidebar = () => {
 
       <CreatePost open={open} setOpen={setOpen} />
     </div>
-  )
-}
+  );
+};
 
-export default Sidebar
+export default Sidebar;
