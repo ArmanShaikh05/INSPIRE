@@ -2,7 +2,6 @@ import "./sidebar.scss";
 import { Avatar } from "../../assets";
 import {
   HiOutlineCalendarDays,
-  HiOutlineCalendarDays,
   HiOutlineCog6Tooth,
   HiOutlineHome,
   HiOutlinePlus
