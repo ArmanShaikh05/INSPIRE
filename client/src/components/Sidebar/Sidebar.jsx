@@ -4,7 +4,9 @@ import {
   HiOutlineCalendarDays,
   HiOutlineCog6Tooth,
   HiOutlineHome,
-  HiOutlinePlus
+  HiOutlineHomeModern,
+  HiOutlinePlus,
+  HiOutlineUsers
 } from "react-icons/hi2";
 import { FaFileCircleCheck } from "react-icons/fa6";
 import { PiRanking } from "react-icons/pi";
@@ -74,12 +76,6 @@ const Sidebar = () => {
             <span>Home</span>
           </div>
         </li>
-        <li onClick={() => sidebarHandler("Search")}>
-          <div className={`StyledNavLink ${path === "search" ? "active" : ""}`}>
-            <HiOutlineSearch />
-            <span>Search</span>
-          </div>
-        </li>
         <li onClick={() => sidebarHandler("Messages")}>
           <div className={`StyledNavLink ${path === "chat" ? "active" : ""}`}>
             <HiOutlineCalendarDays />
@@ -92,18 +88,7 @@ const Sidebar = () => {
             <span>Profile</span>
           </div>
         </li>
-        <li>
-          <div className={`StyledNavLink ${path === "bookings" ? "active" : ""}`} onClick={() => navigate("/bookings")}>
-            <HiOutlineCalendarDays />
-            <span>Bookings</span>
-          </div>
-        </li>
-        <li>
-          <div className={`StyledNavLink ${path === "cabins" ? "active" : ""}`} onClick={() => navigate("/cabins")}>
-            <HiOutlineHomeModern />
-            <span>Cabins</span>
-          </div>
-        </li>
+        
         <li>
           <div className={`StyledNavLink ${path === "users" ? "active" : ""}`} onClick={() => navigate("/users")}>
             <HiOutlineUsers />
@@ -128,20 +113,10 @@ const Sidebar = () => {
             <span>Rankings</span>
           </div>
         </li>
+        
         <li>
           <Link className="StyledNavLink" to={"/home"}>
-            <span>Home</span>
-          </Link>
-        </li>
-        <li>
-          <Link className="StyledNavLink" to={"/chat"}>
-            <span>Chats</span>
-          </Link>
-        </li>
-        <li onClick={() => sidebarHandler("Profile")}>
-          <Link className="StyledNavLink" to={`/profile/${user?._id}`}>
-            <HiOutlineCalendarDays />
-            <span>Profile</span>
+            <span>Meeting</span>
           </Link>
         </li>
         <li>

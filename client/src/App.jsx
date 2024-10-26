@@ -21,6 +21,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setSocket } from './redux/socketSlice';
 import { setOnlineUsers } from './redux/chatSlice';
 import { setLikeNotification } from './redux/rtnSlice';
+import Feed from "./components/Feed";
 
 const App = () => {
   const { user } = useSelector(store => store.auth);
