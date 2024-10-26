@@ -1,9 +1,16 @@
 import sharp from "sharp";
+import fs from 'fs';
+import path from 'path';
+import axios from 'axios'
 import cloudinary from "../utils/cloudinary.js";
 import { Post } from "../models/post.model.js";
 import { User } from "../models/user.model.js";
 import { Comment } from "../models/comment.model.js";
 import { getReceiverSocketId, io } from "../socket/socket.js";
+
+import { fileURLToPath } from 'url';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export const addNewPost = async (req, res) => {
     try {
@@ -13,20 +20,41 @@ export const addNewPost = async (req, res) => {
 
         if (!image) return res.status(400).json({ message: 'Image required' });
 
-        // image upload 
+        const tempDir = path.join(__dirname, 'temporary');
+        if (!fs.existsSync(tempDir)) {
+            fs.mkdirSync(tempDir);
+        }
+
+        const imagePath = path.join(tempDir, image.originalname);
+        await sharp(image.buffer).toFile(imagePath);
+
+        const moderationResponse = await axios.post('http://localhost:5000/predict', {
+            text: caption
+        });
+
+        const predictions = moderationResponse.data.predictions;
+        const isAppropriate = predictions.every(prediction => prediction === 2);
+        const moderationMessage = isAppropriate ? 'Content is appropriate' : 'Content is inappropriate';
+
+        if (!isAppropriate) {
+            fs.unlinkSync(imagePath);
+            return res.status(200).json({ message: moderationMessage });
+        }
+
         const optimizedImageBuffer = await sharp(image.buffer)
             .resize({ width: 800, height: 800, fit: 'inside' })
             .toFormat('jpeg', { quality: 80 })
             .toBuffer();
 
-        // buffer to data uri
         const fileUri = `data:image/jpeg;base64,${optimizedImageBuffer.toString('base64')}`;
         const cloudResponse = await cloudinary.uploader.upload(fileUri);
+
         const post = await Post.create({
             caption,
             image: cloudResponse.secure_url,
             author: authorId
         });
+
         const user = await User.findById(authorId);
         if (user) {
             user.posts.push(post._id);
@@ -35,16 +63,20 @@ export const addNewPost = async (req, res) => {
 
         await post.populate({ path: 'author', select: '-password' });
 
+        fs.unlinkSync(imagePath);
+
         return res.status(201).json({
             message: 'New post added',
             post,
             success: true,
-        })
-
+        });
     } catch (error) {
-        console.log(error);
+        console.error('Error adding post:', error);
+        return res.status(500).json({ message: 'An error occurred while adding the post' });
     }
-}
+};
+
+
 export const getAllPost = async (req, res) => {
     try {
         const posts = await Post.find().sort({ createdAt: -1 })

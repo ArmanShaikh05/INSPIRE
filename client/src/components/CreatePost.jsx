@@ -41,13 +41,19 @@ const CreatePost = ({ open, setOpen }) => {
         },
         withCredentials: true
       });
+      console.log(res)
       if (res.data.success) {
         dispatch(setPosts([res.data.post, ...posts]));// [1] -> [1,2] -> total element = 2
         toast.success(res.data.message);
         setOpen(false);
+      }else{
+        console.log('printed')
+        toast.error('Content is inappropriate')
+        alert('Content is in appropriate')
+        setOpen(false)
       }
     } catch (error) {
-      toast.error(error.response.data.message);
+      toast.error('Content is inappropriate');
     } finally {
       setLoading(false);
     }

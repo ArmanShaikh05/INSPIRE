@@ -54,7 +54,7 @@ const studentSchema = new Schema({
   },
   enrollmentNumber: {
     type: String,
-    unique: true,
+    // unique: true,
   },
   enrollmentDate: {
     type: Date,

@@ -116,7 +116,7 @@ const Post = ({ post }) => {
                     </Avatar>
                     <div className='flex text-white items-center gap-3'>
                         <h1>{post.author?.username}</h1>
-                       {user?._id === post.author._id &&  <Badge variant="secondary">Author</Badge>}
+                       {user?._id === post?.author?._id &&  <Badge variant="secondary">Author</Badge>}
                     </div>
                 </div>
                 <Dialog>
@@ -130,7 +130,7 @@ const Post = ({ post }) => {
                         
                         <Button variant='ghost' className="cursor-pointer w-fit">Add to favorites</Button>
                         {
-                            user && user?._id === post?.author._id && <Button onClick={deletePostHandler} variant='ghost' className="cursor-pointer w-fit">Delete</Button>
+                            user && user?._id === post?.author?._id && <Button onClick={deletePostHandler} variant='ghost' className="cursor-pointer w-fit">Delete</Button>
                         }
                     </DialogContent>
                 </Dialog>
