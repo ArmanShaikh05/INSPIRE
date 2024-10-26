@@ -114,7 +114,7 @@ const Post = ({ post }) => {
                         <AvatarImage src={post.author?.profilePicture} alt="post_image" />
                         <AvatarFallback>CN</AvatarFallback>
                     </Avatar>
-                    <div className='flex text-white items-center gap-3'>
+                    <div className='flex text-black items-center gap-3'>
                         <h1>{post.author?.username}</h1>
                        {user?._id === post?.author?._id &&  <Badge variant="secondary">Author</Badge>}
                     </div>

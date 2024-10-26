@@ -114,10 +114,8 @@ const Sidebar = () => {
           </div>
         </li>
         
-        <li>
-          <Link className="StyledNavLink" to={"/home"}>
+        <li onClick={() => window.location.href = 'http://localhost:3001'}>
             <span>Meeting</span>
-          </Link>
         </li>
         <li>
           <Link className="StyledNavLink" to={"/account/edit"}>
