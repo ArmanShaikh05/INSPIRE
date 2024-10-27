@@ -41,6 +41,10 @@ const universitySchema = new Schema({
       type: String,
     },
   },
+  role:{
+    type:String,
+    default:'University'
+},
   establishedYear: {
     type: Number,
   },

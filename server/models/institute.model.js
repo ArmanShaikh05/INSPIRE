@@ -86,6 +86,10 @@ const instituteSchema = new Schema({
   description: {
     type: String, // Brief description of the institute
   },
+  role:{
+    type:String,
+    default:'Institute'
+},
   createdAt: {
     type: Date,
     default: Date.now,

@@ -4,7 +4,7 @@ import jwt from "jsonwebtoken";
 import getDataUri from "../utils/datauri.js";
 import cloudinary from "../utils/cloudinary.js";
 import { Post } from "../models/post.model.js";
-
+import { Admin } from "../models/admin.model.js";
 import { Student } from "../models/student.model.js";
 import { Alumni } from "../models/alumni.model.js";
 import { Institute } from "../models/institute.model.js";
@@ -64,23 +64,25 @@ export const register = async (req, res) => {
                     employmentStatus: {
                         currentEmployer: additionalData.currentEmployer
                     },
-                    institute: additionalData.instituteId
+                    institute: additionalData.instituteId,
+                    ...additionalData
                 });
                 break;
             case 'institute':
                 newUser = new Institute({
-                    name: username,
+                    username: username,
                     email,
                     password: hashedPassword,
-                    universityId: additionalData.universityId
+                    ...additionalData
                 });
                 break;
             case 'university':
                 newUser = new University({
-                    name: username,
+                    username: username,
                     email,
                     password: hashedPassword,
-                    universityCode: additionalData.universityCode
+                    universityCode: additionalData.universityCode,
+                    ...additionalData
                 });
                 break;
             case 'admin':

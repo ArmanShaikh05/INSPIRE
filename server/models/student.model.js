@@ -90,6 +90,10 @@ const studentSchema = new Schema({
       type: String,
     },
   },
+  role:{
+    type:String,
+    default:'Student'
+},
   academicRecords: [
     {
       semester: {

@@ -95,6 +95,10 @@ const alumniSchema = new Schema({
       type: String,
     },
   },
+  role:{
+    type:String,
+    default:'Alumni'
+},
   blockchainHash: {
     type: String, // Store the blockchain verification hash here
   },
