@@ -49,6 +49,10 @@ const alumniSchema = new Schema({
       type: String,
     },
   },
+  skills:[{
+    type:String
+  }
+  ],
   institute: {
     type: Schema.Types.ObjectId,
     ref: 'Institute', // Reference to Institute Schema

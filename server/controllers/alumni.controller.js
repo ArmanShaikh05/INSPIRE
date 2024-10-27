@@ -49,6 +49,7 @@ export const registerAlumni = async (req, res, next) => {
       email,
       password: hashedPassword,
       linkedInProfile,
+      skills:profile.skills.skills.map(el=>el.title),
       institute: instituteId,
       employmentStatus: {
         currentEmployer: profile.experiences[0]?.title || "",
