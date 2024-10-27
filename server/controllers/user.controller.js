@@ -57,14 +57,9 @@ export const register = async (req, res) => {
                 break;
             case 'alumni':
                 newUser = new Alumni({
-                    fullName: username,
+                    username: username,
                     email,
                     password: hashedPassword,
-                    linkedInProfile: additionalData.linkedInProfile,
-                    employmentStatus: {
-                        currentEmployer: additionalData.currentEmployer
-                    },
-                    institute: additionalData.instituteId,
                     ...additionalData
                 });
                 break;
@@ -182,7 +177,7 @@ export const login = async (req, res) => {
       }).json({
         message: `Welcome back ${responseUser.username}`,
         success: true,
-        user: responseUser,
+        user
       });
   
     } catch (error) {

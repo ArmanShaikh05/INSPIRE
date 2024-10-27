@@ -56,7 +56,7 @@ export async function getProfileTopCard(userHandle) {
     headline: includedData.headline,
     publicIdentifier: includedData.publicIdentifier,
     url: `https://www.linkedin.com/in/${includedData.publicIdentifier}/`,
-    authorProfileId: reportData.report?.authorProfileId,
+    authorProfileId: reportData?.report?.authorProfileId,
     profilePicture
   };
   console.log(ProfileTopCard)

@@ -10,6 +10,10 @@ const alumniSchema = new Schema({
   name: {
     type: String,
   },
+  password:{
+    type:String,
+    required:true
+  },
   email: {
     type: String,
     required: true,
